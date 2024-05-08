@@ -2,6 +2,10 @@ name: CICD
 on:
   - push
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   release:
     uses: cloud-cli/workflows/.github/workflows/npm-build-release.yml@main
